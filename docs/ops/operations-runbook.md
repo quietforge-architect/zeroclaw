@@ -24,6 +24,54 @@ For first-time installation, start from [one-click-bootstrap.md](../setup-guides
 | User service | `zeroclaw service install && zeroclaw service start` | persistent operator-managed runtime |
 | Docker / Podman | `docker compose up -d` | containerized deployment |
 
+## Local Ollama Runtime
+
+For local-provider operation on Windows, treat Ollama as a managed infrastructure dependency rather than an ad-hoc side process.
+
+### Health and observation
+
+```powershell
+# Ollama daemon health
+Invoke-WebRequest http://127.0.0.1:11434/api/tags -UseBasicParsing
+
+# Installed / loaded models
+ollama list
+ollama ps
+```
+
+### Preload the standard local model set in the background
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "S:\pkg\infra\qf_lifecycle\scripts\install-ollama-models.ps1"
+```
+
+Default preload set:
+
+- `phi4-mini` — fast default local model
+- `qwen2.5-coder:7b` — code-specialized local model
+- `mistral:7b` — balanced general local model
+
+### Desktop entrypoint
+
+Create the desktop shortcut once:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "S:\pkg\infra\qf_lifecycle\create-ollama-desktop-shortcut.ps1"
+```
+
+The shortcut launches:
+
+```powershell
+S:\pkg\infra\qf_lifecycle\launch-ollama-console.ps1 -Watch
+```
+
+This gives operators a persistent console for:
+
+- starting Ollama if it is not already running
+- observing installed and loaded models
+- checking the local API endpoint
+- verifying the current ZeroClaw provider/model pairing
+
 ## Docker / Podman Runtime
 
 If you installed via `./install.sh --docker`, the container exits after onboarding. To run
