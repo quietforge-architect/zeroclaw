@@ -50,6 +50,33 @@ cargo test
 - Evidence provided (test/log/trace/screenshot/perf):
 - If any command is intentionally skipped, explain why:
 
+## Evidence Gate: Claim Audit (required)
+
+### Verified (actually tested)
+
+Only include behavior personally executed and observed.
+
+- Verified behavior:
+  - Environment/OS:
+  - Evidence artifact path:
+  - Command and exit code:
+
+### Assumed (not tested)
+
+List behavior expected to work but not personally validated.
+
+- Assumption:
+  - Why assumed:
+  - Follow-up issue/PR:
+
+### Unknown / Not Tested
+
+List unverified areas and blockers.
+
+- Unknown:
+  - Blocker:
+  - Follow-up issue/PR:
+
 ## Security Impact (required)
 
 - New permissions/capabilities? (`Yes/No`)
